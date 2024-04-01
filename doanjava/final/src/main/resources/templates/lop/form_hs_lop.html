@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+		<div class="row">
+			<div class="col-1 no-padding">
+				<a href="#" th:href="@{/lop/{id}/detail(id=${wrapper.id_lop})}"class="btn btn-success float-right">
+					<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+				</a>
+			</div>
+			<div class="col-6 no-padding">
+
+			</div>
+		</div>
+
+        <div class="row d-flex justify-content-center">
+            <form style="min-width: 300px;" action="#" th:action="@{/lop/detail/save_hocsinh}" th:object="${wrapper}" method="post" novalidate="novalidate">
+    			<h5 class="text-center">Danh sách học sinh</h5>
+				<input type="hidden" th:field="${wrapper.id_lop}" value="${wrapper.id_lop}"/>
+				<table class="table table-bordered table-hover table-striped">
+         			<thead>
+            			<tr>
+               				<th>Select</th>
+               				<th>Name</th>
+               				<th>Addresss</th>  
+           				 </tr>
+        			 </thead>
+        
+         			<tbody>
+            			<tr th:each="hocsinh, stat : ${wrapper.hocsinhlist}">
+               				<td>           				
+          						<input type="checkbox" th:field="*{hocsinhlist[__${stat.index}__].selected}" />
+          						<input type="hidden" th:field="*{hocsinhlist[__${stat.index}__].hocsinh.masv}"/>
+          						<input type="hidden" th:field="*{hocsinhlist[__${stat.index}__].hocsinh.ten}"/>
+          						<input type="hidden" th:field="*{hocsinhlist[__${stat.index}__].hocsinh.diachi}"/>
+          						<input type="hidden" th:field="*{hocsinhlist[__${stat.index}__].hocsinh.ngaysinh}"/>
+               				</td>
+               				<td th:text="${hocsinh.hocsinh.getTen()}"></td>
+               				<td th:text="${hocsinh.hocsinh.getDiachi()}"></td>
+            			</tr>
+         			</tbody>
+      			</table>
+				
+   				 <div class="form-group">
+        			<button type="submit" class="btn btn-block btn-primary">
+           			 <i class="fa fa-save"></i> Save
+        			</button>
+   				 </div>
+			</form>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

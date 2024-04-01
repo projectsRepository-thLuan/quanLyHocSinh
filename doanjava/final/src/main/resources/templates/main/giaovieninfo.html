@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<!--  <head>
+   <title>User Info</title>
+</head> -->
+<body>
+<!-- Include _menu.html -->
+<nav th:replace="layout :: header"></nav>
+<div class="container">
+    <div class="row" >
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+            <table class="table table-bordered table-success">
+                <tr>
+                    <td colspan="3" style="text-align:center"><h6>Thông tin người dùng</h6></td>
+                </tr>
+                <tr>
+                    <td>Tên người dùng</td>
+                    <td colspan="2" style="text-align:center" th:if="${giaovien != null}" th:text="${giaovien.hoten}"></td>
+                </tr>
+                <tr>
+                    <td>Tên truy cập</td>
+                    <td colspan="2" th:if="${userInfo != null}" th:utext="${userInfo}" style="text-align:center"></td>
+                </tr>
+                <tr>
+                    <td>Vai trò</td>
+                    <td colspan="2">
+                        <div th:if="${auth == 2}" style="text-align:center">
+                            <h6>Quản trị viên</h6>
+                        </div>
+                        <div th:if="${auth == 1}" style="text-align:center">
+                            <h6>Thành viên</h6>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Riêng tư</td>
+                    <td colspan="2" style="text-align:center">
+                        <div >
+                            <a href="#" th:href="@{/thaydoi_giaovien/{id}(id=${giaovien.magv})}" class="mr-sm-2 text-primary">Cập nhật cá nhân</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-2">
+            <div class="card" style="width=400px">
+                <th:block th:if="${giaovien.image_path == null}">
+                    <img class="card-img-top" th:src="@{/uploads/avatar.jpg}" alt="avatar" width="100" height="200">
+                </th:block>
+                <th:block th:unless="${giaovien.image_path == null}">
+                    <img class="card-img-top" th:src="@{'/uploads/' + ${giaovien.image_path}}" alt="avatar" width="100" height="200">
+                </th:block>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+
+    </div>
+</div>
+<br/><br/>
+<footer th:replace="layout :: footer"></footer>
+</body>
+
+</html>

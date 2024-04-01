@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+<h1></h1>
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-1 no-padding">
+            <a href="#" th:href="@{/quantri_admin}"class="btn btn-success float-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+            </a>
+        </div>
+        <div class="col-6 no-padding">
+            <a href="#" th:href="@{/chucvu/add}"class="btn btn-success float-right">
+                <i class="fa fa-plus-square"></i> New Position
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <th:block th:if="${#lists.isEmpty(chucvus)}">
+            <h5>No Position</h5>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(chucvus)}">
+            <div class="table-responsive">
+                <h5>List of position</h5>
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Tên chức vụ</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="chucvu,iterStat : ${chucvus}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${chucvu.tencv}"></td>
+                        <td>
+                            <a href="#" th:href="@{/chucvu/{id}/edit(id=${chucvu.macv})}" class="mr-sm-2 text-primary">Sửa</a>
+                            <a href="#" th:href="@{/chucvu/{id}/delete(id=${chucvu.macv})}" class="text-danger"> Xoá </a>&nbsp&nbsp
+                          
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

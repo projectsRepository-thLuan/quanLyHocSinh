@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+<h1></h1>
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-6 no-padding">
+            <a href="#" th:href="@{/loaidiem/add}"class="btn btn-success float-right">
+                <i class="fa fa-plus-square"></i> Thêm loại điểm
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <th:block th:if="${#lists.isEmpty(loaidiems)}">
+            <h5>No Class</h5>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(loaidiems)}">
+            <div class="table-responsive">
+                <h5>List of Class</h5>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên loại điểm</th>
+                        <th>Hệ số</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="loaidiem,iterStat : ${loaidiems}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${loaidiem.tenloai}"></td>
+                        <td th:text="${loaidiem.heso}"></td>
+                        <td>
+                            <a href="#" th:href="@{/loaidiem/{id}/edit(id=${loaidiem.maloai})}" class="btn btn-warning">
+                                <i class="fa-solid fa-pen-to-square"></i> Sửa
+                            </a>
+                            <a href="#" th:href="@{/loaidiem/{id}/delete(id=${loaidiem.maloai})}" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i> Xoá
+                            </a>
+                          
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

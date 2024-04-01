@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container" id="main-content">
+    <div th:if="${success}"
+         class="row alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <span th:text="${success}"></span>
+    </div>
+    <div class="row">
+        <div class="col-6 no-padding">
+            <a href="#" th:href="@{/monhoc/add}"class="btn btn-success float-right">
+                <i class="fa fa-plus-square"></i> Tạo môn học
+            </a>
+        </div>
+    </div>
+
+    <h5>&nbsp</h5>
+    <th:block th:if="${#lists.isEmpty(monhocs.pageList)}">
+        <h3>Không có lớp học</h3>
+    </th:block>
+
+    <th:block th:unless="${#lists.isEmpty(monhocs.pageList)}">
+        <nav class="row justify-content-center wow fadeIn"
+             data-wow-delay="0.2s">
+            <div class="row">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên môn học</th>
+                        <th>Hệ số điểm</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="monhoc,iterStat : ${monhocs.pageList}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${monhoc.tenmh}"></td>
+                        <td th:text="${monhoc.heso}"></td>
+                        <td>
+                        <td>
+                            <a href="#" th:href="@{/monhoc/{id}/edit(id=${monhoc.mamh})}" class="btn btn-warning">
+                                <i class="fa-solid fa-pen-to-square"></i> Sửa
+                            </a>
+                            <a href="#" th:href="@{/monhoc/{id}/delete(id=${monhoc.mamh})}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Xóa</a>
+                            <a href="#" th:href="@{/monhoc/{id}/detail(id=${monhoc.mamh})}" class="btn btn-success">
+                                <i class="fa-solid fa-info"></i> Chi tiết</a>
+                        </td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nav>
+        <div class="row justify-content-center wow fadeIn">
+            <ul class="pagination">
+                <li
+                        th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+                    <a class="page-link" th:href="@{/monhoc}">First</a>
+                </li>
+                <li
+                        th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+                    <a class="page-link" aria-label="Previous"
+                       th:href="@{|${baseUrl}${currentIndex - 1}|}"
+                       title='Go to previous page'><span aria-hidden="true">«</span>
+                        <span class="sr-only">Previous</span></a>
+                </li>
+
+                <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+                    th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+                    <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
+                            th:text='${item}'>1</span>
+                    </a>
+                </li>
+
+                <li
+                        th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+                    <a class="page-link" aria-label="Next"
+                       th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
+                            aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+                </li>
+                <li
+                        th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+                    <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+                </li>
+            </ul>
+        </div>
+
+    </th:block>
+</div>
+<!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

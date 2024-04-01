@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-6 no-padding">
+            <form class="form-inline" th:action="@{/diem/{id}/detail(id=${wrapper.lop.malop})}" method="get">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </button>
+            </form>
+        </div>
+
+        <div class="col-6 no-padding">
+
+
+        </div>
+    </div>
+    <h5>Tên học sinh:<span th:text="${wrapper.hocsinh.ten}"></span></h5>
+    <h5>Tên lớp: <span th:text="${wrapper.lop.tenlop}"></span></h5>
+    <div class="row mt-4">
+        <th:block th:if="${#lists.isEmpty(wrapper.ketQuas)}">
+            <h5>Kết quả chưa sẵn sàng</h5>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(wrapper.ketQuas)}">
+            <div class="table-responsive">
+                <h5>Bảng điểm HK1</h5>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên môn học</th>
+                        <th>Điểm miệng</th>
+                        <th>Điểm 15 phút</th>
+                        <th>Điểm 1 tiết</th>
+                        <th>Điểm thi giữa kì</th>
+                        <th>Điểm thi học kỳ</th>
+                        <th>Điểm trung bình</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ketqua,iterStat : ${wrapper.ketQuas}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${ketqua.monhoc.tenmh}"></td>
+
+                        <th:block th:if="${ketqua.diemMieng == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemMieng == -1.0}">
+                            <td th:text="${ketqua.diemMieng}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diem15p == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diem15p == -1.0}">
+                            <td th:text="${ketqua.diem15p}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diem1t == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diem1t == -1.0}">
+                            <td th:text="${ketqua.diem1t}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diemGK == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemGK == -1.0}">
+                            <td th:text="${ketqua.diemGK}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diemCK == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemCK == -1.0}">
+                            <td th:text="${ketqua.diemCK}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diemTB == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemTB == -1.0}">
+                            <td th:text="${ketqua.diemTB}"></td>
+                        </th:block>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Điểm tổng kết</td>
+                        <th:block th:if="${wrapper.diemHK == -1.0}">
+                            <td colspan="5">Chưa có đủ thông tin để tính</td>
+                        </th:block>
+                        <th:block th:unless="${wrapper.diemHK == -1.0}">
+                            <td th:text="${wrapper.diemHK}" colspan="6"></td>
+                        </th:block>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+
+    </div>
+
+    <div class="row mt-4">
+        <th:block th:if="${#lists.isEmpty(drapper.ketQuas)}">
+            <h5>Kết quả chưa sẵn sàng</h5>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(drapper.ketQuas)}">
+            <div class="table-responsive">
+                <h5>Bảng điểm HK2</h5>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên môn học</th>
+                        <th>Điểm miệng</th>
+                        <th>Điểm 15 phút</th>
+                        <th>Điểm 1 tiết</th>
+                        <th>Điểm thi giữa kì</th>
+                        <th>Điểm thi học kỳ</th>
+                        <th>Điểm trung bình</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ketqua,iterStat : ${drapper.ketQuas}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${ketqua.monhoc.tenmh}"></td>
+
+                        <th:block th:if="${ketqua.diemMieng == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemMieng == -1.0}">
+                            <td th:text="${ketqua.diemMieng}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diem15p == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diem15p == -1.0}">
+                            <td th:text="${ketqua.diem15p}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diem1t == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diem1t == -1.0}">
+                            <td th:text="${ketqua.diem1t}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diemGK == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemGK == -1.0}">
+                            <td th:text="${ketqua.diemGK}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diemCK == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemCK == -1.0}">
+                            <td th:text="${ketqua.diemCK}"></td>
+                        </th:block>
+
+                        <th:block th:if="${ketqua.diemTB == -1.0}">
+                            <td>Chưa có thông tin</td>
+                        </th:block>
+                        <th:block th:unless="${ketqua.diemTB == -1.0}">
+                            <td th:text="${ketqua.diemTB}"></td>
+                        </th:block>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Điểm tổng kết</td>
+                        <th:block th:if="${drapper.diemHK == -1.0}">
+                            <td colspan="5">Chưa có đủ thông tin để tính</td>
+                        </th:block>
+                        <th:block th:unless="${drapper.diemHK == -1.0}">
+                            <td th:text="${drapper.diemHK}" colspan="6"></td>
+                        </th:block>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </div>
+    <th:block th:if="${diemBQ == -1.0}">
+        <h6>Điểm bình quân: Chưa có đủ thông tin để tính điểm này</h6>
+    </th:block>
+    <th:block th:unless="${diemBQ == -1.0}">
+        <h6>Điểm bình quân:<span th:text="${diemBQ}"></span></h6>
+    </th:block>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

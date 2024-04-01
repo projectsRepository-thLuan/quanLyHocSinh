@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+        <div class="row">
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/giaovien}"class="btn btn-success float-right">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </a>
+            </div>
+            <div class="col-5 no-padding">
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+            </div>
+            <div class="col-2 no-padding">
+                <a href="#" th:href="@{/giaovien/detail/{id}/phancong_lop(id=${lop_mh.id_gv})}"class="btn btn-success float-right">
+                    <i class="fa fa-plus-square"></i> Phân công lớp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                </a>
+            </div>
+             <div class="col-2 no-padding">
+                <a href="#" th:href="@{/giaovien/detail/{id}/phancong_monhoc(id=${lop_mh.id_gv})}"class="btn btn-success float-right">
+                    <i class="fa fa-plus-square"></i> Phân công môn học
+                </a>
+            </div>
+        </div>
+        <h1>&nbsp</h1>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <h5>Họ tên:<span th:text="${tengv}"></span></h5>
+                <h5>Môn học phụ trách:<span th:text="${lop_mh.monhoc} ? ${lop_mh.monhoc.tenmh} : 'Nothing'"></span></h5>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width=400px">
+                    <th:block th:if="${hinhanh == null}">
+                        <img class="card-img-top" th:src="@{/uploads/avatar.jpg}" alt="avatar" width="30" height="150">
+                    </th:block>
+                    <th:block th:unless="${hinhanh == null}">
+                        <img class="card-img-top" th:src="@{'/uploads/' + ${hinhanh}}" alt="avatar" width="30" height="150">
+                    </th:block>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="row mt-4">
+            <th:block th:if="${#lists.isEmpty(lop_mh.lops)}">
+                <h5>No Class</h5>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(lop_mh.lops)}">
+                <div class="table-responsive">
+                    <h5>List of Class</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên lớp</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="lop,iterStat : ${lop_mh.lops}">
+                            <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${lop.tenlop}"></td>
+                            <td>
+                                <a href="#" th:href="@{/giaovien/detail/{id_gv}/{id_lop}/delete_pc_lop(id_gv=${lop_mh.id_gv}, id_lop=${lop.malop})}" class="mr-sm-2 text-primary"> Xoá </a>
+                            </td> 
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

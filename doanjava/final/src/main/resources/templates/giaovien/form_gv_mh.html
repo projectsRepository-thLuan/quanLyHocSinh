@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+		<div class="row">
+			<div class="col-6 no-padding">
+				<form class="form-inline" action="#" th:action="@{/giaovien/{id}/detail(id=${wrapper.id_gv})}" method="get">
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+					</button>
+				</form>
+			</div>
+
+			<div class="col-6 no-padding">
+
+			</div>
+		</div>
+
+        <div class="row d-flex justify-content-center">
+            <form style="min-width: 300px;" action="#" th:action="@{/giaovien/detail/save_phancong_monhoc}" th:object="${wrapper}" method="post" novalidate="novalidate">
+    			<h5 class="text-center">Danh sách môn học</h5>
+				<h5 class="text-center" th:text="${wrapper.id_gv}"></h5>
+				<input type="hidden" th:field="${wrapper.id_gv}" value="${wrapper.id_gv}"/>
+				<table class="table table-bordered table-hover table-striped">
+         			<thead>
+            			<tr>
+               				<th>Select</th>
+               				<th>Môn học</th>
+           				 </tr>
+        			 </thead>
+        
+         			<tbody>
+            			<tr th:each="monhoc, stat : ${wrapper.list_monhoc}">
+               				<td>           				
+          						<input type="checkbox" th:field="*{list_monhoc[__${stat.index}__].selected}" />
+          						<input type="hidden"th:field="*{list_monhoc[__${stat.index}__].monhoc.mamh}"/>
+          						<input type="hidden"th:field="*{list_monhoc[__${stat.index}__].monhoc.tenmh}"/>
+               				</td>
+               				<td th:text="${monhoc.monhoc.getTenmh()}"></td>
+            			</tr>
+         			</tbody>
+      			</table>
+   				 <div class="form-group">
+        			<button type="submit" class="btn btn-block btn-primary">
+           			 <i class="fa fa-save"></i> Save
+        			</button>
+   				 </div>
+			</form>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

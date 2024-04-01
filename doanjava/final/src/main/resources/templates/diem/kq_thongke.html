@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-1 no-padding">
+            <a href="#" th:href="@{/diem/{id}/thongke(id=${lop_id})}"class="btn btn-success float-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+            </a>
+        </div>
+        <div class="col-5 no-padding">
+
+        </div>
+
+        <div class="col-6 no-padding">
+
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <th:block th:if="${#lists.isEmpty(l)}">
+            <h5>Chưa có đủ thông tin để tính toán</h5>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(l)}">
+            <div class="table-responsive">
+                <h5></h5>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên học sinh</th>
+                        <th>Lớp</th>
+                        <th>Điểm</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="kq,iterStat : ${l}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${kq.hocsinh.ten}"></td>
+                        <td th:text="${kq.hocsinh.lop.tenlop}"></td>
+                        <td th:text="${kq.diem}"></td>
+                        <td>
+                            <a href="#" th:href="@{/diem/detail/{id}/diem_hocsinh(id=${kq.hocsinh.masv})}" class="text-danger">Chi Tiết</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

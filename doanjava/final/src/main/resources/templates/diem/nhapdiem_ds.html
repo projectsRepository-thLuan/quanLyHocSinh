@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-6 no-padding">
+            <form class="form-inline" action="#" th:action="@{/diem/{id}/detail(id=${diem.lopid})}" method="get">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </button>
+            </form>
+        </div>
+
+        <div class="col-6 no-padding">
+
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <form style="min-width: 300px;" action="#" th:action="@{/diem/save_nhapdiem_ds}" th:object="${diem}" method="post" novalidate="novalidate" enctype="multipart/form-data">
+            <h5 class="text-center">Nhập điểm</h5>
+            <input type="hidden" th:field="${diem.lopid}" value="${diem.lopid}"/>
+            <div class="form-group">
+                <label>Môn học:</label>
+                <select class="form-control mdb-select md-form md-outline colorful-select dropdown-primary" th:field="*{mamh}">
+                    <option value=""> -- </option>
+                    <option th:each="monhoc : ${monhocs}"
+                            th:value="${monhoc.mamh}"
+                            th:text="${monhoc.tenmh}"/>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Học kỳ:</label>
+                <select class="form-control mdb-select md-form md-outline colorful-select dropdown-primary" th:field="*{hocky}">
+                    <option value=""> -- </option>
+                    <option th:value="1" th:text="HK1"/>
+                    <option th:value="2" th:text="HK2"/>
+                </select>
+            </div>
+            <div class="form-group mt-3">
+                <label for="file"><i class="fas fa-file-csv"></i>Select a CSV file</label>
+                <input type="file" name="file" class="form-control" id="file" accept=".csv">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-block btn-primary">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

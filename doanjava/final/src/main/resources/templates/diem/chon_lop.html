@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container-fluid" id="main-content">
+    <div class="row d-flex justify-content-center">
+
+            <div class="row">
+                <div class="col-4 no-padding">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Chi tiết Điểm</th>
+                            <th>Thống kê</th>
+                            <th>Lớp</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="lop, stat : ${wrapper.k10}">
+                            <td>
+                                <a href="#" th:href="@{/diem/{id}/detail(id=${lop.lop.malop})}" class="text-danger">Chi Tiết</a>
+                            </td>
+                            <td>
+                                <a href="#" th:href="@{/diem/{id}/thongke(id=${lop.lop.malop})}" class="text-danger">Thống Kê Chi Tiết</a>
+                            </td>
+                            <td th:text="${lop.lop.getTenlop()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4 no-padding">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Chi tiết Điểm</th>
+                            <th>Thống kê</th>
+                            <th>Lớp</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="lop, stat : ${wrapper.k11}">
+                            <td>
+                                <a href="#" th:href="@{/diem/{id}/detail(id=${lop.lop.malop})}" class="text-danger">Chi Tiết</a>
+                            </td>
+                            <td>
+                                <a href="#" th:href="@{/diem/{id}/thongke(id=${lop.lop.malop})}" class="text-danger">Thống Kê Chi Tiết</a>
+                            </td>
+                            <td th:text="${lop.lop.getTenlop()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4 no-padding">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Chi tiết Điểm</th>
+                            <th>Thống kê</th>
+                            <th>Lớp</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="lop, stat : ${wrapper.k12}">
+                            <td>
+                                <a href="#" th:href="@{/diem/{id}/detail(id=${lop.lop.malop})}" class="text-danger">Chi Tiết</a>
+                            </td>
+                            <td>
+                                <a href="#" th:href="@{/diem/{id}/thongke(id=${lop.lop.malop})}" class="text-danger">Thống Kê Chi Tiết</a>
+                            </td>
+                            <td th:text="${lop.lop.getTenlop()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

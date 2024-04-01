@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="head">
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>MySchool App</title>
+    <link href="../../resources/static/images/logo.png" th:href="@{/images/logo.png}" rel="shortcut icon" />
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/c8928b4176.js" crossorigin="anonymous"></script>
+    <!-- Custom style -->
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div th:fragment="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="nav-brand" href="#" th:href="@{/}">
+                <i class="fa-solid fa-school"></i> HUTECH - Đại học Công nghệ Tp. HCM
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger"  th:if="${#request.userPrincipal == null}" href="#" th:href="@{/login}">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/chucvu}" th:if="${#request.userPrincipal != null}">
+                            <i class="fa-solid fa-award"></i> Chức vụ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:if="${#request.userPrincipal != null}" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-graduation-cap"></i> Học sinh
+                        </a>
+                        <div class="dropdown-menu">
+                            <a th:href="@{/hocsinh}" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Danh sách học sinh
+                            </a>
+                            <a href="#" th:href="@{/hocsinh/add}"class="dropdown-item">
+                                <i class="fa-solid fa-circle-plus"></i> Thêm học sinh mới
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:if="${#request.userPrincipal != null}" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-sharp fa-solid fa-person-chalkboard"></i> Giáo viên
+                        </a>
+                        <div class="dropdown-menu">
+                            <a th:href="@{/giaovien}" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Danh sách giáo viên
+                            </a>
+                            <a href="#" th:href="@{/giaovien/add}"class="dropdown-item">
+                                <i class="fa-solid fa-circle-plus"></i> Thêm giáo viên
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:if="${#request.userPrincipal != null}" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-sharp fa-solid fa-people-roof"></i> Lớp
+                        </a>
+                        <div class="dropdown-menu">
+                            <a th:href="@{/lop}" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Danh sách lớp
+                            </a>
+                            <a href="#" th:href="@{/lop/add}"class="dropdown-item">
+                                <i class="fa-solid fa-circle-plus"></i> Thêm lớp
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:if="${#request.userPrincipal != null}" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-book"></i> Môn học
+                        </a>
+                        <div class="dropdown-menu">
+                            <a th:href="@{/monhoc}" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Danh sách môn
+                            </a>
+                            <a href="#" th:href="@{/monhoc/add}"class="dropdown-item">
+                                <i class="fa-solid fa-circle-plus"></i> Thêm môn
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:if="${#request.userPrincipal != null}" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-feather-pointed"></i> Quản lý điểm
+                        </a>
+                        <div class="dropdown-menu">
+                            <a th:href="@{/loaidiem}" class="dropdown-item">
+                                <i class="fa fa-plus-square"></i> Loại điểm
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" th:href="@{/diem}"class="dropdown-item">
+                                <i class="fa fa-plus-square"></i> Điểm
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:if="${#request.userPrincipal != null}" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> Tài khoản
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{/giaovieninfo}">
+                                <i class="fa-solid fa-circle-info"></i> Thông tin cá nhân
+                            </a>
+                            <a class="dropdown-item" th:href="@{/thaydoi_giaovien/2}">
+                                <i class="fa-solid fa-user-pen"></i> Thay đổi
+                            </a>
+                            <a class="dropdown-item" th:href="@{/logout}">
+                                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1></h1>
+	</div>
+
+    <h1>Main content</h1>
+
+    <footer th:fragment="footer" class="container">
+
+    </footer>
+
+</body>
+</html>

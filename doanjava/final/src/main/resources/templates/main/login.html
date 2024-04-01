@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<nav th:replace="layout :: header"></nav>
+<div class="main-content">
+    <div class="container" id="main-content">
+        <div class="row d-flex justify-content-center">
+            <h3>Login to continue</h3>
+        </div>
+        <div class="row d-flex justify-content-center">
+                <form th:action="@{/login}" method="post">
+                    <input type="text" name="username" class="form-control" placeholder="Tài khoản"><br />
+                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu" /><br />
+                    <button type="submit" class ="btn btn-lg btn-danger">Login</button>
+                </form>
+        </div>
+        <br>
+        <div class="row d-flex justify-content-center">
+            <p th:if="${param.error}" class="error">Invalid username or password</p>
+            <p th:if="${param.logout}" class="success">You have been logged out</p>
+        </div>
+    </div>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+    <div class="container" id="main-content">
+        <div class="row">
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/giaovien}"class="btn btn-success float-right">
+					<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </a>
+            </div>
+            <div class="col-6 no-padding">
+
+            </div>
+        </div>
+
+		<form style="min-width: 300px;" action="#" th:action="@{/giaovien/save}" th:object="${giaovien}" method="post" novalidate="novalidate" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-4">
+					<h5 class="text-center">Thêm giáo viên</h5>
+
+					<input type="hidden" th:field="*{giaovien.magv}" />
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Họ tên"
+							   th:field="*{giaovien.hoten}" th:errorclass="field-error" />
+						<!-- <em th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></em>-->
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Địa chỉ"
+							   th:field="*{giaovien.diachi}" th:errorclass="field-error" />
+						<!-- <em th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></em>-->
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Ngày sinh" th:field="${giaovien.date}"/>
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Tên đăng nhập"
+							   th:field="*{giaovien.username}" />
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="password" placeholder="Mật khẩu"
+							   th:field="*{giaovien.password}" />
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-block btn-primary">
+							<i class="fa fa-save"></i> Save
+						</button>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="width=400px">
+						<th:block th:if="${giaovien.giaovien.image_path == null}">
+							<img class="card-img-top" th:src="@{/uploads/avatar.jpg}" alt="avatar" width="100" height="200">
+						</th:block>
+						<th:block th:unless="${giaovien.giaovien.image_path == null}">
+							<img class="card-img-top" th:src="@{'/uploads/' + ${giaovien.giaovien.image_path}}" alt="avatar" width="100" height="200">
+						</th:block>
+					</div>
+					<div class="form-group mt-3">
+						<label for="file"><i class="fas fa-file-csv"></i>Select a image file</label>
+						<input type="file" name="file" class="form-control" id="file">
+					</div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+		</form>
+
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

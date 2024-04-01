@@ -1,0 +1,11 @@
+
+Main-function
+-Chèn hình ảnh vào tiểu sử
+-Tra cứu thông tin:tra cứu điểm và tra cứu thông tin cá nhân
+-Thống kê dựa trên thành tích:
+	+Lớp:học sinh giỏi, học sinh yếu
+	+Theo khối lớp:học sinh giỏi nhất khối
+
+Extend-fundtion
+-Phân công thời gian dạy cho các giáo viên bộ môn
+-Lưu hồ sơ của học sinh cho từng niên khoá học từ 10->11->12

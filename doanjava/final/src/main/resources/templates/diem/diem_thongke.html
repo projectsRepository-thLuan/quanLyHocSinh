@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-6 no-padding">
+            <form class="form-inline" action="#" th:action="@{/diem}" method="get">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </button>
+            </form>
+        </div>
+
+        <div class="col-6 no-padding">
+
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <form style="min-width: 300px;" action="#" th:action="@{/diem/thongke/kq_thongke}" th:object="${vtk}" method="post" novalidate="novalidate">
+            <h5 class="text-center">Thống kê</h5>
+            <input type="hidden" th:field="*{lop_id}" th:value="${lop_id}"/>
+            <div class="form-group">
+                <label>Loại học sinh:</label>
+                <select class="form-control mdb-select md-form md-outline colorful-select dropdown-primary" th:field="*{loaihocsinh}">
+                    <option value=""> -- </option>
+                    <option th:value="yeu" th:text="'Học sinh yếu'"/>
+                    <option th:value="tb" th:text="'Học sinh trung bình'"/>
+                    <option th:value="kha" th:text="'Học sinh khá'"/>
+                    <option th:value="gioi" th:text="'Học sinh giỏi'"/>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Thời gian:</label>
+                <select class="form-control mdb-select md-form md-outline colorful-select dropdown-primary" th:field="*{thoidiem}">
+                    <option value=""> -- </option>
+                    <option th:value="hk1" th:text="'HK1'"/>
+                    <option th:value="hk2" th:text="'HK2'"/>
+                    <option th:value="all" th:text="'Cả năm'"/>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-block btn-success">
+                    <i class="fa-solid fa-square-poll-horizontal"></i> Xem kết quả
+                </button>
+            </div>
+        </form>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

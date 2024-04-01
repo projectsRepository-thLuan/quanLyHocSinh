@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+        <div class="row">
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/quantri_admin}"class="btn btn-success float-right">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </a>
+            </div>
+            <div class="col-5 no-padding">
+                <form class="form-inline" action="#" th:action="@{/hocsinh/search}" method="get">
+    				<input class="form-control mr-sm-2" type="search" name="term" placeholder="Search by name ..." />
+   					 <button class="btn btn-primary" type="submit">
+        				<i class="fa fa-search"></i> Tìm kiếm
+   					 </button>
+				</form>
+            </div>
+
+            <div class="col-6 no-padding">
+                <a href="#" th:href="@{/hocsinh/add}"class="btn btn-success float-right">
+                    <i class="fa fa-plus-square"></i> Thêm học sinh
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <th:block th:if="${#lists.isEmpty(students)}">
+                <h5>Không có học sinh</h5>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(students)}">
+                <div class="table-responsive">
+                    <h5>Danh sách học sinh</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên</th>
+                            <th>Địa chỉ</th>
+                            <th>Ngày sinh</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="student,iterStat : ${students}">
+                            <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${student.ten}"></td>
+                            <td th:text="${student.diachi}"></td>
+                            <td th:text="${#dates.format(student.ngaysinh, 'dd-MMM-yyyy')}"></td>
+                            <td>
+                                <a href="#" th:href="@{/hocsinh/{id}/edit(id=${student.masv})}" class="mr-sm-2 text-primary"><i class="fa fa-pencil"></i></a>
+                                <a href="#" th:href="@{/hocsinh/{id}/delete(id=${student.masv})}" class="text-danger"><i class="fa fa-trash"></i></a>&nbsp&nbsp
+                                <a href="#" th:href="@{/hocsinh/{id}/detail(id=${student.masv})}" class="text-danger"><i class="fa fa-newspaper-o"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

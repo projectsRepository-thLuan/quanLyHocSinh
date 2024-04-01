@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+		<div class="row">
+			<div class="col-1 no-padding">
+				<a href="#" th:href="@{/hocsinh}"class="btn btn-success float-right">
+					<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+				</a>
+			</div>
+			<div class="col-6 no-padding">
+
+			</div>
+		</div>
+        <div class="row d-flex justify-content-center">
+            <form style="min-width: 300px;" action="#" th:action="@{/hocsinh/save}" th:object="${student}" method="post" novalidate="novalidate">
+    			<h5 class="text-center">Nhập thêm học sinh</h5>
+
+   				 <input type="hidden" th:field="*{hocsinh.masv}" />
+   				 <div class="form-group">
+       				 <input class="form-control" type="text" placeholder="Họ tên"
+             			  th:field="*{hocsinh.ten}" th:errorclass="field-error" />
+       				<!-- <em th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></em>-->
+   				 </div>
+				<div class="form-group">
+					<label>Giới tính:</label>
+					<select class="form-control mdb-select md-form md-outline colorful-select dropdown-primary" th:field="*{hocsinh.gioitinh}">
+						<option value=""> -- </option>
+						<option th:value="nam" th:text="Nam"/>
+						<option th:value="nu" th:text="Nữ"/>
+					</select>
+				</div>
+    			<div class="form-group">
+        			<input class="form-control" type="text" placeholder="Địa chỉ"
+              		 th:field="*{hocsinh.diachi}" th:errorclass="field-error" />
+       				<!-- <em th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></em>-->
+    			</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Ngày sinh" th:field="${student.date}"/>
+				</div>
+   				 <div class="form-group">
+        			<button type="submit" class="btn btn-block btn-primary">
+           			 <i class="fa fa-save"></i> Save
+        			</button>
+   				 </div>
+			</form>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

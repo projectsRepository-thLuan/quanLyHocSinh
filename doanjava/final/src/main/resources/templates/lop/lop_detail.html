@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+	<h1 th:text="${lop.tenlop}" style="text-align:center"></h1>
+    <div class="container" id="main-content">
+        <div class="row">
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/lop}"class="btn btn-success float-right">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </a>
+            </div>
+            <div class="col-7 no-padding">
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+            </div>
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/lop/detail/{id}/export_hs(id=${lop.malop})}"class="btn btn-success float-right">
+                    <i class="fas fa-file-export"></i> Export
+                </a>
+            </div>
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/lop/detail/{id}/import_hs(id=${lop.malop})}"class="btn btn-success float-right">
+                    <i class="fas fa-file-import"></i> Import
+                </a>
+            </div>
+            <div class="col-2 no-padding">
+                <a href="#" th:href="@{/lop/detail/{id}/add_hocsinh(id=${lop.malop})}"class="btn btn-success float-right">
+                    <i class="fa fa-plus-square"></i> Thêm học sinh&nbsp&nbsp&nbsp&nbsp
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <th:block th:if="${#lists.isEmpty(lop.hocsinhs)}">
+                <h5>No Student on Class</h5>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(lop.hocsinhs)}">
+                <div class="table-responsive">
+                    <h5>List of Student</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên học sinh</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="hocsinh,iterStat : ${lop.hocsinhs}">
+                            <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${hocsinh.ten}"></td>
+                            <td>
+                                <a href="#" th:href="@{/lop/detail/{id_hs}/{id_class}/delete_hs(id_hs=${hocsinh.masv}, id_class=${lop.malop})}" class="text-danger"> Xoá </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

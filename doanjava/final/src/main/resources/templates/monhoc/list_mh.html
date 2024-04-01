@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+    <div class="container" id="main-content">
+        <div class="row">
+            <div class="col-1 no-padding">
+                <a href="#" th:href="@{/quantri_admin}"class="btn btn-success float-right">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </a>
+            </div>
+
+            <div class="col-6 no-padding">
+                <a href="#" th:href="@{/monhoc/add}"class="btn btn-success float-right">
+                    <i class="fa fa-plus-square"></i> Tạo môn học
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <th:block th:if="${#lists.isEmpty(monhocs)}">
+                <h5>Chưa có môn học</h5>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(monhocs)}">
+                <div class="table-responsive">
+                    <h5>Danhs sách các môn học</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên môn học</th>
+                            <th>Hệ số điểm</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="monhoc,iterStat : ${monhocs}">
+                            <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${monhoc.tenmh}"></td>
+                            <td th:text="${monhoc.heso}"></td>
+                            <td>
+                                <a href="#" th:href="@{/monhoc/{id}/edit(id=${monhoc.mamh})}" class="btn btn-waring">
+                                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                                </a>
+                                <a href="#" th:href="@{/monhoc/{id}/delete(id=${monhoc.mamh})}" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i> Xóa</a>
+                                <a href="#" th:href="@{/monhoc/{id}/detail(id=${monhoc.mamh})}" class="btn btn-success">
+                                    <i class="fa-solid fa-square-info"></i> Chi tiết</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

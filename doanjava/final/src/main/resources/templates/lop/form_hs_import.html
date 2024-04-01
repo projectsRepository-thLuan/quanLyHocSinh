@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-1 no-padding">
+            <a href="#" th:href="@{/lop/{id}/detail(id=${lop_id.malop})}"class="btn btn-success float-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+            </a>
+        </div>
+        <div class="col-6 no-padding">
+
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <form style="min-width: 300px;" action="#" th:action="@{/lop/detail/save_import}" th:object="${lop_id}" method="post"enctype="multipart/form-data">
+            <h5 class="text-center">Nhập thêm học sinh</h5>
+            <input type="hidden" th:field="${lop_id.malop}" value="${lop_id.malop}"/>
+            <div class="form-group mt-3">
+                <label for="file"><i class="fas fa-file-csv"></i>Select a CSV file</label>
+                <input type="file" name="file" class="form-control-file" id="file" accept=".csv">
+            </div>
+            <button type="submit" class="btn btn-primary">Import học sinh</button>
+        </form>
+    </div>
+</div><!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
